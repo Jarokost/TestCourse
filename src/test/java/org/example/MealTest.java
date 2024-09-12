@@ -2,6 +2,8 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MealTest {
@@ -13,10 +15,11 @@ class MealTest {
         Meal meal = new Meal(35);
 
         //when
-        int discounted = meal.getDiscountedPrice(7);
+        int discountedPrice = meal.getDiscountedPrice(7);
 
         //then
-        assertEquals(28, discounted);
+        assertEquals(28, discountedPrice);
+        assertThat(discountedPrice, equalTo(28));
 
     }
 
@@ -29,6 +32,7 @@ class MealTest {
 
         //then
         assertSame(meal1, meal2);
+        assertThat(meal1, sameInstance(meal2));
 
     }
 
@@ -41,7 +45,7 @@ class MealTest {
 
         //then
         assertNotSame(meal1, meal2);
-
+        assertThat(meal1, not(sameInstance(meal2)));
     }
 
     @Test
