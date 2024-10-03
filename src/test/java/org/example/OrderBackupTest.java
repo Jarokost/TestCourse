@@ -2,6 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ public class OrderBackupTest {
         orderBackup.createFile();
     }
 
+    @Tag("fries")
     @Test
     void backupOrderWithOneMeal() throws IOException {
 
