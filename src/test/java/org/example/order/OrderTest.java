@@ -1,7 +1,9 @@
-package org.example;
+package org.example.order;
 
+import org.example.extensions.BeforeAfterExtension;
+import org.example.Meal;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,7 +49,7 @@ public class OrderTest {
         assertThat(order.getMeals(), empty());
         assertThat(order.getMeals().size(), equalTo(0));
         assertThat(order.getMeals(), hasSize(0));
-        assertThat(order.getMeals(), emptyCollectionOf(Meal.class));
+        MatcherAssert.assertThat(order.getMeals(), emptyCollectionOf(Meal.class));
     }
 
     @Test
