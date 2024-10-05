@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 class AccountTest {
 
@@ -89,6 +91,18 @@ class AccountTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class, () -> account.setEmail("wrongEmail"));
+    }
+
+    @Test
+    void validEmailShouldBeSet() {
+        //given
+        Account account = new Account();
+
+        //when
+        account.setEmail("kontakt@gmail.com");
+
+        //then
+        assertThat(account.getEmail(), is("kontakt@gmail.com"));
     }
 
 }
