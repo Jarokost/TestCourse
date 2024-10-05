@@ -1,5 +1,6 @@
-package org.example;
+package org.example.cart;
 
+import org.example.Meal;
 import org.example.order.Order;
 
 import java.util.ArrayList;
