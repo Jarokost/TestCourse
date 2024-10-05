@@ -26,7 +26,7 @@ public class Meal {
         return price;
     }
 
-    public int qetQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -58,5 +58,9 @@ public class Meal {
                 "price=" + price +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    int sumPrice() {
+        return getPrice() * getQuantity();
     }
 }

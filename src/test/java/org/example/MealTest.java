@@ -23,6 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class MealTest {
 
@@ -144,7 +146,7 @@ class MealTest {
         for(int i = 0; i < order.getMeals().size(); i++) {
 
             int price = order.getMeals().get(i).getPrice();
-            int quantity = order.getMeals().get(i).qetQuantity();
+            int quantity = order.getMeals().get(i).getQuantity();
 
             Executable executable = () -> {
                 assertThat(calculatePrice(price, quantity), lessThan(67));
@@ -156,6 +158,23 @@ class MealTest {
         }
 
         return dynamicTests;
+    }
+
+    @Test
+    void testMealSumPrice() {
+        //given
+        Meal meal = mock(Meal.class);
+
+        given(meal.getPrice()).willReturn(15);
+        given(meal.getQuantity()).willReturn(3);
+
+        given(meal.sumPrice()).willCallRealMethod();
+
+        //when
+        int result = meal.sumPrice();
+
+        //then
+        assertThat(result, equalTo(45));
     }
 
     private int calculatePrice(int price, int quantity) {
