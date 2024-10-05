@@ -1,4 +1,6 @@
-package org.example;
+package org.example.order;
+
+import org.example.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,17 @@ public class Order {
 
     void cancel() {
         this.meals.clear();
+    }
+
+    int totalPrice() {
+
+        int sum = this.meals.stream().mapToInt(meal -> meal.getPrice()).sum();
+
+        if(sum < 0) {
+            throw new IllegalStateException("Price limit exceeded");
+        } else {
+            return sum;
+        }
     }
 
     @Override
