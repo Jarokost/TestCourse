@@ -1,6 +1,9 @@
 package org.example.account;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,6 +15,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@MockitoSettings(strictness = Strictness.STRICT_STUBS)
 public class AccountServiceTest {
 
     @Test
@@ -44,6 +48,21 @@ public class AccountServiceTest {
 
         //then
         assertThat(accountList, hasSize(0));
+    }
+
+    @Test
+    void getAccountsByName() {
+
+        //given
+        AccountRepository accountRepository = mock(AccountRepository.class);
+        AccountService accountService = new AccountService(accountRepository);
+        given(accountRepository.getByName("jare")).willReturn(Collections.singletonList("kostujak"));
+
+        //when
+        List<String> accountNames = accountService.findByName("jarek");
+
+        //then
+        assertThat(accountNames, Matchers.contains("kostujak"));
     }
 
     private List<Account> prepareAccountData() {
