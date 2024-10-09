@@ -1,4 +1,4 @@
-package org.example;
+package org.example.meal;
 
 import java.util.Objects;
 
@@ -65,5 +65,9 @@ public class Meal {
 
     int sumPrice() {
         return getPrice() * getQuantity();
+    }
+
+    public Object getName() {
+        return this.name;
     }
 }

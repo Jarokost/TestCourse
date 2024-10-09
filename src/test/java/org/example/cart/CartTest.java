@@ -1,6 +1,6 @@
 package org.example.cart;
 
-import org.example.Meal;
+import org.example.meal.Meal;
 import org.example.order.Order;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
