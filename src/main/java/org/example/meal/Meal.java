@@ -67,7 +67,7 @@ public class Meal {
         return getPrice() * getQuantity();
     }
 
-    public Object getName() {
+    public String getName() {
         return this.name;
     }
 }
