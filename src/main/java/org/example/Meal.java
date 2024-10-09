@@ -7,6 +7,9 @@ public class Meal {
     private int quantity;
     private String name;
 
+    public Meal() {
+    }
+
     public Meal(int price) {
         this.price = price;
     }
@@ -26,7 +29,7 @@ public class Meal {
         return price;
     }
 
-    public int qetQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -58,5 +61,9 @@ public class Meal {
                 "price=" + price +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    int sumPrice() {
+        return getPrice() * getQuantity();
     }
 }
