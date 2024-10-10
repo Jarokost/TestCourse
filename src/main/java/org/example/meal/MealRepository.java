@@ -1,6 +1,7 @@
 package org.example.meal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,46 +22,41 @@ public class MealRepository {
     }
 
     public List<Meal> findByName(String mealName, boolean exactMatch) {
+        return meals.stream()
+                .filter(meal -> exactMatch?meal.getName().equals(mealName):meal.getName().startsWith(mealName))
+                .collect(Collectors.toList());
+    }
 
-        List<Meal> result;
+    public List<Meal> findByPrice(int price, SearchOption searchOption) {
+        return findByPriceWithInitialData(price, searchOption, meals);
+    }
 
-        if(exactMatch) {
-            result = meals.stream()
-                    .filter(meal -> meal.getName().equals(mealName))
+    public List<Meal> findByPriceWithInitialData(int price, SearchOption searchOption, List<Meal> initialData) {
+
+        List<Meal> result = new ArrayList<>();
+
+        switch(searchOption) {
+            case SearchOption.EQUAL ->
+            result = initialData.stream()
+                    .filter(meal -> meal.getPrice() == price)
                     .collect(Collectors.toList());
-        } else {
-            result = meals.stream()
-                    .filter(meal -> meal.getName().startsWith(mealName))
-                    .collect(Collectors.toList());
+
+            case SearchOption.LOWER ->
+                    result = initialData.stream()
+                            .filter(meal -> meal.getPrice() < price)
+                            .collect(Collectors.toList());
+
+            case SearchOption.HIGHER ->
+                    result = initialData.stream()
+                            .filter(meal -> meal.getPrice() > price)
+                            .collect(Collectors.toList());
         }
 
         return result;
     }
 
-    public List<Meal> findByPrice(int price, SearchOption searchOption) {
-
-        List<Meal> result;
-
-        switch(searchOption) {
-            case SearchOption.EQUAL ->
-            result = meals.stream()
-                    .filter(meal -> meal.getPrice() == price)
-                    .collect(Collectors.toList());
-
-            case SearchOption.LOWER ->
-                    result = meals.stream()
-                            .filter(meal -> meal.getPrice() < price)
-                            .collect(Collectors.toList());
-
-            case SearchOption.HIGHER ->
-                    result = meals.stream()
-                            .filter(meal -> meal.getPrice() > price)
-                            .collect(Collectors.toList());
-
-            default ->
-                result = null;
-        }
-
-        return result;
+    public List<Meal> find(String mealName, boolean exactMatch, int price, SearchOption searchOption) {
+        List<Meal> nameMatches = findByName(mealName, exactMatch);
+        return findByPriceWithInitialData(price, searchOption, nameMatches);
     }
 }
