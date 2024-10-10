@@ -1,4 +1,4 @@
-package org.example;
+package org.example.meal;
 
 import org.example.extensions.IAExceptionIgnoreExtension;
 import org.example.order.Order;

@@ -1,6 +1,6 @@
 package org.example.order;
 
-import org.example.Meal;
+import org.example.meal.Meal;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;

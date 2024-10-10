@@ -1,7 +1,7 @@
 package org.example.order;
 
 import org.example.extensions.BeforeAfterExtension;
-import org.example.Meal;
+import org.example.meal.Meal;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
