@@ -37,9 +37,30 @@ public class MealRepository {
         return result;
     }
 
-    public List<Meal> findByPrice(int price) {
-        return meals.stream()
-                .filter(meal -> meal.getPrice() == price)
-                .collect(Collectors.toList());
+    public List<Meal> findByPrice(int price, SearchOption searchOption) {
+
+        List<Meal> result;
+
+        switch(searchOption) {
+            case SearchOption.EQUAL ->
+            result = meals.stream()
+                    .filter(meal -> meal.getPrice() == price)
+                    .collect(Collectors.toList());
+
+            case SearchOption.LOWER ->
+                    result = meals.stream()
+                            .filter(meal -> meal.getPrice() < price)
+                            .collect(Collectors.toList());
+
+            case SearchOption.HIGHER ->
+                    result = meals.stream()
+                            .filter(meal -> meal.getPrice() > price)
+                            .collect(Collectors.toList());
+
+            default ->
+                result = null;
+        }
+
+        return result;
     }
 }
